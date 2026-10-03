@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TurboTidy — Suggests Fast Cleaning</title>
+    <meta name="description" content="TurboTidy - Free PC cleaner online. Analyze temporary files, browser cache, downloads, duplicates and reclaim disk space instantly.">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <span class="site-name">🧹 TurboTidy</span>
+            <span class="site-tagline">— suggests fast cleaning</span>
+        </div>
+        <div class="header-center">
+            <span id="datetime"></span>
+        </div>
+        <div class="header-right">
+            <nav class="nav">
+                <a href="#home" class="nav-link active">Home</a>
+                <a href="#how" class="nav-link">How It Works</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+            <div class="live-badge">
+                <span class="live-dot"></span> LIVE
+            </div>
+        </div>
+    </header>
+
+    <!-- License status banner -->
+    <div id="licenseBanner" class="license-banner hidden"></div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1 class="hero-title">PC CLEANER ONLINE</h1>
+        <p class="hero-subtitle">Clean • Analyze • Optimize</p>
+
+        <div class="avatar-container">
+            <img src="https://i.ibb.co/hFqMy6QY/turbo.png" alt="TurboTidy Avatar" class="avatar">
+        </div>
+
+        <!-- Trial / price info -->
+        <div class="trial-info" id="trialInfo">
+            <p>🎁 <strong>Free trial</strong> — 1 full scan available</p>
+            <p class="trial-sub">After that: <strong>€2,99 one-time</strong> — unlimited access forever</p>
+        </div>
+
+        <!-- Trust badges -->
+        <div class="trust-badges">
+            <span class="trust-badge">🔒 Secure Payment</span>
+            <span class="trust-badge">🛡️ Safe Site</span>
+            <span class="trust-badge">💳 Powered by Stripe</span>
+            <span class="trust-badge">⚡ No Installation</span>
+        </div>
+
+        <button class="btn-scan" id="scanBtn" onclick="startScan()">SCAN PC</button>
+
+        <!-- Scan Progress -->
+        <div class="scan-section" id="scanSection">
+            <div class="scan-status" id="scanStatus">🔍 Scanning in progress...</div>
+
+            <div class="scan-items" id="scanItems">
+                <div class="scan-item">
+                    <span>Temporary Files</span>
+                    <span class="scan-value" data-target="1.8">0.0 GB</span>
+                </div>
+                <div class="scan-item">
+                    <span>Browser Cache</span>
+                    <span class="scan-value" data-target="0.85">0 MB</span>
+                </div>
+                <div class="scan-item">
+                    <span>Downloads</span>
+                    <span class="scan-value" data-target="2.4">0.0 GB</span>
+                </div>
+                <div class="scan-item">
+                    <span>Duplicate Files</span>
+                    <span class="scan-value" data-target="0.62">0 MB</span>
+                </div>
+                <div class="scan-item">
+                    <span>Recycle Bin</span>
+                    <span class="scan-value" data-target="0.31">0 MB</span>
+                </div>
+            </div>
+
+            <div class="scan-total">
+                <span>─────────────────────────</span>
+                <div class="total-row">
+                    <span>Potential Cleanup</span>
+                    <span class="total-value" id="totalValue">0.00 GB</span>
+                </div>
+            </div>
+
+            <!-- Chart -->
+            <div class="chart-container">
+                <canvas id="cleanupChart"></canvas>
+            </div>
+
+            <!-- Action button -->
+            <button class="btn-clean" id="cleanBtn" onclick="handleCleanNow()">CLEAN NOW</button>
+
+            <!-- Payment box (hidden by default) -->
+            <div class="paywall" id="paywall">
+                <h3>🔒 Trial Expired</h3>
+                <p>You've used your free scan. Activate unlimited access to keep cleaning your PC.</p>
+                <div class="paywall-price">
+                    <span class="price-amount">€2,99</span>
+                    <span class="price-label">one-time · forever</span>
+                </div>
+                <a href="https://buy.stripe.com/14A3cw2pOfGvgA9cHi48000" target="_blank" class="btn-pay">
+                    💳 Activate Unlimited Access
+                </a>
+                <div class="paywall-trust">
+                    <span>🔒 SSL Secured</span>
+                    <span>🛡️ Safe Checkout</span>
+                    <span>💳 Stripe Verified</span>
+                </div>
+                <p class="paywall-note">After payment, reload this page to unlock full access.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section" id="how">
+        <h2 class="section-title">How It Works</h2>
+        <div class="section-content">
+            <p class="how-intro">TurboTidy is simple, fast and transparent. Here's exactly how to use it:</p>
+
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>🎁 First Scan — Free Trial</h3>
+                    <p>Click the <strong>SCAN PC</strong> button. Your first full scan is completely <strong>free</strong>. TurboTidy analyzes temporary files, browser cache, downloads, duplicate files and the recycle bin — then shows you exactly how much space can be recovered.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>🔒 Second Scan — Payment Required</h3>
+                    <p>When you try to scan a second time, the free trial is over. A <strong>paywall</strong> appears with a secure Stripe payment link for <strong>€2,99 (one-time, forever)</strong>. No subscription, no hidden fees.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>💳 Complete the Payment</h3>
+                    <p>Click <strong>"Activate Unlimited Access"</strong> and complete the payment on Stripe's secure checkout. Your card details are never stored on our servers — Stripe handles everything with bank-level encryption.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>✅ Instant Automatic Unlock</h3>
+                    <p>Once your payment is confirmed by Stripe, your access is <strong>activated automatically</strong>. No codes, no waiting, no manual steps — just reload the page and TurboTidy is fully unlocked.</p>
+                    <p>Your license is tied to your payment and stored securely. From this moment on, you can scan and clean <strong>unlimited times, forever</strong>.</p>
+                    <p class="step-note">🔒 The activation is handled server-side via a secure Stripe webhook — your purchase is verified in real time and your account is upgraded instantly.</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <h3>🧹 Clean &amp; Enjoy</h3>
+                    <p>Click <strong>CLEAN NOW</strong> whenever you want. TurboTidy removes the analyzed junk and shows you the space recovered. Unlimited scans, unlimited cleaning — for life.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2 class="section-title">About TurboTidy</h2>
+        <div class="section-content">
+            <p>TurboTidy is a web application that helps you keep your PC clean and optimized directly from your browser — no installation required.</p>
+
+            <h3>What TurboTidy Does</h3>
+            <ul class="feature-list">
+                <li>🧹 Analyzes temporary files</li>
+                <li>💾 Checks available disk space</li>
+                <li>🗑️ Finds useless or duplicate files</li>
+                <li>🌐 Analyzes browser cache and data</li>
+                <li>📊 Shows how much space can be recovered</li>
+                <li>🔍 Scans files selected by the user</li>
+                <li>📈 Shows used/available RAM</li>
+                <li>🛡️ Checks browser security settings</li>
+                <li>📋 Creates a full cleaning report</li>
+            </ul>
+
+            <h3>Simple, Honest Pricing</h3>
+            <p>🎁 <strong>1 free scan</strong> to try every feature.</p>
+            <p>💳 <strong>€2,99 one-time</strong> — unlimited access forever. No subscription, no recurring costs.</p>
+
+            <h3>Security &amp; Trust</h3>
+            <p>🔒 All payments are processed by <strong>Stripe</strong>, a PCI-DSS Level 1 certified provider.</p>
+            <p>🛡️ Our site uses HTTPS encryption to protect your data.</p>
+            <p>💳 We never see or store your card details.</p>
+            <p>⚡ Everything runs in your browser — nothing is installed on your PC.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2 class="section-title">Contact</h2>
+        <div class="section-content">
+            <p>Questions or issues with your access? Get in touch!</p>
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent! We will reply as soon as possible.');">
+                <input type="text" placeholder="Your name" required>
+                <input type="email" placeholder="Your email" required>
+                <textarea placeholder="Your message" rows="5" required></textarea>
+                <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 TurboTidy — Suggests Fast Cleaning</p>
+        <div class="footer-trust">
+            <span>🔒 Secure Payment</span>
+            <span>🛡️ Safe Site</span>
+            <span>💳 Powered by Stripe</span>
+        </div>
+        <p class="footer-note">Unlimited access for €2,99 one-time · Payments secured by Stripe</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
